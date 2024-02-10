@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export const Context = createContext();
 function ContextProvider({ children }) {
   const [search, setsearch] = useState("");
@@ -19,6 +19,9 @@ function ContextProvider({ children }) {
     let data2 = await res2.json();
     setweather({ name, ...data2 });
 }
+useEffect(()=>{
+  getWeather();
+},[])
   return (
     <Context.Provider value={{ search, setsearch, getWeather,weather }}>
       {children}
